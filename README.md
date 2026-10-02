@@ -107,13 +107,20 @@ CrudSpringBoots
 ├── mvnw
 └── mvnw.cmd
 ```
-
 ## 🔗 REST API Endpoints
 
-### Create Student
+The application exposes RESTful APIs under the following base path:
+
+```text
+/api/students
+```
+
+### 1. Create Student
+
+Creates a new student record.
 
 ```http
-POST /students
+POST /api/students/create
 ```
 
 Example request:
@@ -126,31 +133,61 @@ Example request:
 }
 ```
 
-### Get All Students
+**Response:** `201 Created`
+
+---
+
+### 2. Get Student By ID
+
+Retrieves a student using their ID.
 
 ```http
-GET /students
+GET /api/students/get/{id}
 ```
 
-### Get Student By ID
+Example:
 
 ```http
-GET /students/{id}
+GET /api/students/get/1
+```
+
+**Response:**
+
+* `200 OK` — Student found
+* `404 Not Found` — Student does not exist
+
+---
+
+### 3. Get All Students
+
+Retrieves all students from the database.
+
+```http
+GET /api/students/getAll
+```
+
+**Response:**
+
+* `200 OK` — Students found
+* `404 Not Found` — No students available
+
+---
+
+### 4. Update Student
+
+Updates an existing student's information.
+
+```http
+PUT /api/students/update/{id}
 ```
 
 Example:
 
 ```http
-GET /students/1
+PUT /api/students/update/1
 ```
 
-### Update Student
-
-```http
-PUT /students/{id}
-```
-
-Example:
+Example request:
 
 ```json
 {
@@ -160,19 +197,55 @@ Example:
 }
 ```
 
-### Delete Student
+**Response:**
+
+* `200 OK` — Student updated successfully
+* `404 Not Found` — Student does not exist
+
+---
+
+### 5. Delete Student
+
+Deletes a student using their ID.
 
 ```http
-DELETE /students/{id}
+DELETE /api/students/delete/{id}
 ```
 
 Example:
 
 ```http
-DELETE /students/1
+DELETE /api/students/delete/1
 ```
 
-> **Note:** Update the endpoint paths above if your `StudentController` uses a different base path.
+**Response:**
+
+* `200 OK` — `"recored deleted"`
+* `404 Not Found` — Student does not exist
+
+---
+
+## 🔄 API Request Flow
+
+```text
+Client / Postman
+       │
+       ▼
+StudentController
+       │
+       │  /api/students
+       ▼
+StudentService
+       │
+       ▼
+StudentRepository
+       │
+       ▼
+MySQL Database
+```
+
+The `StudentController` handles HTTP requests and delegates business operations to the `StudentService`. The service communicates with `StudentRepository` to perform database operations.
+
 
 ## 🗄️ Database Configuration
 
