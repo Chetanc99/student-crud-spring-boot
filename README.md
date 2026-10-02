@@ -311,12 +311,13 @@ Possible improvements include:
 * Swagger / OpenAPI documentation
 * Unit and integration testing
 * Spring Security authentication
-* JWT-based authorization
+* JWT-based -authorization
 * Docker support
+  
 
 ## 👨‍💻 Author
 
-**Chetan Chaudhari**
+**Chetan Chaudhari**  
 
 GitHub: [Chetanc99](https://github.com/Chetanc99)
 
